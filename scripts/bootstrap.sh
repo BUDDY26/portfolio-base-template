@@ -11,9 +11,9 @@
 #
 # What it does:
 #   1. Prompts for project-specific values
-#   2. Replaces all {{PLACEHOLDER}} tokens in all tracked files
-#   3. Renames files if needed
-#   4. Validates the resulting structure
+#   2. Replaces all {{PLACEHOLDER}} tokens in all text files
+#   3. Validates the resulting structure
+#   4. Writes the bootstrap completion record
 #   5. Prints a checklist of manual steps remaining
 # =============================================================================
 
@@ -139,27 +139,7 @@ success "All placeholder replacements complete."
 header "Validating repository structure"
 bash scripts/validate-structure.sh
 
-# ── Create .env.example if missing ───────────────────────────────────────────
-if [[ ! -f ".env.example" ]]; then
-  cat > .env.example << 'ENVEOF'
-# Environment variable reference for this project.
-# Copy this file to .env and fill in real values.
-# Never commit .env — it is in .gitignore.
-
-# Application
-APP_ENV=development
-APP_PORT=8000
-SECRET_KEY=your-secret-key-here
-
-# Database
-DATABASE_URL=postgresql://user:password@localhost:5432/dbname
-
-# Add project-specific variables below
-ENVEOF
-  success "Created .env.example"
-fi
-
-# ── Remove bootstrap marker ───────────────────────────────────────────────────
+# ── Write bootstrap completion record ────────────────────────────────────────
 # Write a record that bootstrap was completed
 echo "bootstrapped_on: $TODAY" >> .bootstrap-complete
 echo "project: $PROJECT_NAME" >> .bootstrap-complete
@@ -178,13 +158,11 @@ echo "  5. Create at least one ADR in docs/adr/ (copy ADR-001-template.md)"
 echo "  6. Add your actual source files to src/"
 echo "  7. Add your actual test files to tests/"
 echo "  8. Add required environment variables to .env.example"
-echo "  9. Initialize git and push to GitHub:"
+echo "  9. Commit and push your bootstrap changes:"
 echo ""
-echo -e "     ${BLUE}git init${RESET}"
 echo -e "     ${BLUE}git add .${RESET}"
 echo -e "     ${BLUE}git commit -m 'chore: initialize from portfolio-base template'${RESET}"
-echo -e "     ${BLUE}git remote add origin https://github.com/${GITHUB_USERNAME}/${REPO_NAME}.git${RESET}"
-echo -e "     ${BLUE}git push -u origin main${RESET}"
+echo -e "     ${BLUE}git push${RESET}"
 echo ""
 echo " 10. In your first Claude Code session, say:"
 echo -e "     ${BOLD}\"Run the entry protocol\"${RESET}"
