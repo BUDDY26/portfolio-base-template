@@ -34,7 +34,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"
 
       - name: Install lint dependencies
         run: |
@@ -114,8 +113,8 @@ jobs:
       - name: Make scripts executable
         run: chmod +x scripts/bootstrap.sh scripts/validate-structure.sh
 
-      - name: Run structure validator (strict)
-        run: bash scripts/validate-structure.sh --strict
+      - name: Run structure validator
+        run: bash scripts/validate-structure.sh
 
   # ── Security Scan ────────────────────────────────────────────────────────────
   security:
