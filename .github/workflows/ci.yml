@@ -73,23 +73,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }} (with pip cache)
+        if: hashFiles('**/requirements.txt', '**/pyproject.toml') != ''
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
 
+      - name: Set up Python ${{ matrix.python-version }}
+        if: hashFiles('**/requirements.txt', '**/pyproject.toml') == ''
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Install dependencies
+        if: hashFiles('**/requirements.txt') != ''
         run: pip install -r requirements.txt
 
       - name: Run tests with coverage
+        if: hashFiles('tests/**/*.py') != ''
         run: |
           pip install pytest pytest-cov
           pytest tests/ -v --cov=src --cov-report=xml --cov-report=term-missing
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
-        if: matrix.python-version == '3.11'
+        if: matrix.python-version == '3.11' && hashFiles('tests/**/*.py') != ''
         with:
           name: coverage-report
           path: coverage.xml
