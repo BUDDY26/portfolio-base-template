@@ -70,7 +70,7 @@ Key technical decisions are in [`docs/adr/`](docs/adr/).
 
 ## License
 
-{{LICENSE}} — see [`LICENSE`](LICENSE) for details.
+{{LICENSE}}
 
 ---
 

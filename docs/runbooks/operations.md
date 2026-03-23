@@ -74,10 +74,7 @@ See `.env.example` for the full list of required variables.
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `APP_ENV` | Application environment (`development`, `production`) | Yes |
-| `APP_PORT` | Port the application listens on | Yes |
-| `SECRET_KEY` | Application secret key | Yes |
-| `DATABASE_URL` | Database connection string | If using a database |
+| *(fill in from `.env.example`)* | | |
 
 ---
 
@@ -96,7 +93,7 @@ Common causes: missing required files, unfilled `{{PLACEHOLDER}}` tokens.
 
 ### CI is failing
 
-Check the Actions tab on GitHub. The pipeline runs four jobs: lint, test, validate-structure, and security.
+Check the Actions tab on GitHub. Review the pipeline jobs defined in `.github/workflows/ci.yml`.
 
 - Lint or test failures indicate source code issues
 - validate-structure failures indicate missing required files

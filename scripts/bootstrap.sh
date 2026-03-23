@@ -51,6 +51,7 @@ echo "Answer the following questions. Press Enter to accept defaults."
 echo ""
 
 read -rp "  Project name (e.g. my-api-service):         " PROJECT_NAME
+[[ -z "$PROJECT_NAME" ]] && error "Project name cannot be empty."
 read -rp "  One-sentence description:                   " PROJECT_DESCRIPTION
 read -rp "  GitHub username:                            " GITHUB_USERNAME
 read -rp "  Repo name (default: $PROJECT_NAME):         " REPO_NAME
@@ -83,7 +84,11 @@ replace_in_file() {
   # Escape special characters for sed
   local escaped_value
   escaped_value=$(printf '%s\n' "$value" | sed 's/[[\.*^$()+?{|]/\\&/g; s/]/\\]/g')
-  sed -i "s|{{${placeholder}}}|${escaped_value}|g" "$file"
+  if [[ "$(uname)" == "Darwin" ]]; then
+    sed -i '' "s|{{${placeholder}}}|${escaped_value}|g" "$file"
+  else
+    sed -i "s|{{${placeholder}}}|${escaped_value}|g" "$file"
+  fi
 }
 
 replace_all() {

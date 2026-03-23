@@ -1,7 +1,6 @@
 # Hooks
 
-These are behavioral guardrails active in every Claude Code session for this repository.
-Claude enforces these automatically — they do not require explicit invocation.
+These are behavioral guidelines Claude follows when this file is loaded into context. They are **not** enforced automatically by the harness — they rely on Claude reading this file and applying the rules voluntarily. To enforce hooks at the harness level, configure them in `.claude/settings.json`.
 
 ---
 

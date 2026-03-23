@@ -74,7 +74,7 @@ After the refactor, update any affected:
 
 - Inline comments and docstrings
 - `docs/architecture.md` if a component's design changed
-- CLAUDE.md Section 5 if new sharp edges were discovered
+- CLAUDE.md Section 7 if new sharp edges were discovered
 
 ### Step 5 — Report completion
 

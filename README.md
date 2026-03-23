@@ -14,11 +14,8 @@ Every repository created from this template gets:
 | **Claude Code** | `CLAUDE.md` (9-section memory file), 6 skills, 6 hooks |
 | **CI/CD** | GitHub Actions pipeline (lint + test + security scan) |
 | **Documentation** | Architecture doc, ADR template, QA plan, operations runbook |
-| **Source structure** | `src/`, `tests/unit/`, `tests/integration/` with working starter files |
-| **Python tooling** | `pyproject.toml`, `requirements.txt`, pytest + ruff + black configured |
-| **TypeScript tooling** | `package.json`, `tsconfig.json`, jest + eslint + prettier configured |
+| **Source structure** | `src/`, `tests/unit/`, `tests/integration/` (empty, ready to populate) |
 | **Automation** | `bootstrap.sh` (renames all placeholders), `validate-structure.sh` |
-| **GitHub** | PR template, bug report + feature request issue templates |
 
 ---
 
@@ -79,32 +76,17 @@ portfolio-base/
 ├── CLAUDE.md                         # Claude Code operating guide (9 sections)
 ├── README.md                         # This file — template repository documentation
 ├── TEMPLATE_README.md                # Project README scaffold (with {{PLACEHOLDER}} tokens)
-├── CHANGELOG.md                      # Version history
 ├── .env.example                      # Environment variable reference
 ├── .gitignore                        # Python + Node + IDE + OS
 │
-├── pyproject.toml                    # Python: pytest, ruff, black, coverage config
-├── requirements.txt                  # Python: runtime dependencies
-├── package.json                      # TypeScript: scripts, dependencies
-├── tsconfig.json                     # TypeScript: compiler options
-├── jest.config.js                    # TypeScript: test runner config
-├── .eslintrc.js                      # TypeScript: linter config
-├── .prettierrc                       # TypeScript: formatter config
-│
-├── src/                              # Application source code
-│   ├── CLAUDE.md                     # Module-level sharp-edge notes
-│   ├── __init__.py                   # Python package init
-│   ├── main.py                       # Python entry point (starter)
-│   └── index.ts                     # TypeScript entry point (starter)
+├── src/                              # Application source code (populate after bootstrap)
+│   └── .gitkeep
 │
 ├── tests/
-│   ├── conftest.py                   # pytest fixtures
 │   ├── unit/
-│   │   ├── test_main.py              # Python unit test starter
-│   │   └── index.test.ts            # TypeScript unit test starter
+│   │   └── .gitkeep
 │   └── integration/
-│       ├── test_integration_example.py
-│       └── integration.test.ts
+│       └── .gitkeep
 │
 ├── docs/
 │   ├── architecture.md               # System design template
@@ -117,15 +99,11 @@ portfolio-base/
 │
 ├── scripts/
 │   ├── bootstrap.sh                  # First-time setup + placeholder replacement
-│   └── validate-structure.sh        # Structure conformance checker
+│   └── validate-structure.sh         # Structure conformance checker
 │
 ├── .github/
 │   ├── workflows/
 │   │   └── ci.yml                    # Lint + test + security scan pipeline
-│   ├── ISSUE_TEMPLATE/
-│   │   ├── bug-report.md
-│   │   └── feature-request.md
-│   ├── pull_request_template.md
 │   └── dependabot.yml
 │
 └── .claude/
@@ -200,7 +178,7 @@ To bring an existing repo up to this standard:
 After running `bootstrap.sh`, complete these in order:
 
 - [ ] Fill in `CLAUDE.md` sections 4–9 (architecture, sharp edges, portfolio context)
-- [ ] Replace starter `src/main.py` / `src/index.ts` with your actual code
+- [ ] Add your source files to `src/`
 - [ ] Write real tests in `tests/unit/` and `tests/integration/`
 - [ ] Fill in `docs/architecture.md` with your system design
 - [ ] Create your first real ADR in `docs/adr/` (copy `ADR-001-template.md`)

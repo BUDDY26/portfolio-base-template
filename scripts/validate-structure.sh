@@ -43,6 +43,7 @@ REQUIRED_FILES=(
   ".claude/skills/refactor-playbook.md"
   ".claude/skills/documentation.md"
   ".claude/skills/qa-checklist.md"
+  ".claude/skills/release-procedure.md"
   ".claude/hooks/hooks.md"
   "docs/architecture.md"
   "docs/adr/ADR-001-template.md"
@@ -76,7 +77,6 @@ REQUIRED_DIRS=(
   ".claude/skills"
   ".claude/hooks"
   ".github/workflows"
-  ".github/ISSUE_TEMPLATE"
 )
 
 for d in "${REQUIRED_DIRS[@]}"; do

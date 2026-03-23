@@ -13,8 +13,8 @@ Read `CLAUDE.md` in full. Extract:
 
 - Project name, purpose, and status (Section 1)
 - Permitted and forbidden actions (Section 3)
-- Active hooks (Section 7)
-- Known sharp edges (Section 5)
+- Active hooks (Section 9)
+- Known sharp edges (Section 7)
 
 Confirm: "CLAUDE.md read. Rules loaded."
 
