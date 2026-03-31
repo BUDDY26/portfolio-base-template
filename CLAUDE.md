@@ -89,6 +89,10 @@ bash scripts/validate-structure.sh
 
 Documentation is the source of truth for this repository. Code follows documentation — never the reverse.
 
+### External Orchestration Boundary
+
+An external orchestration system (such as Claude Cowork) may determine **what** task is being worked on and **when** work begins. This repository governs **how** implementation is performed. External orchestration does not override repository-level implementation constraints, permission tiers, or the authority hierarchy defined below. If an external system routes a task to this repository, the task is executed under this repository's rules.
+
 ### Authority Hierarchy
 
 ```
@@ -215,6 +219,7 @@ Once approved: update the plan first, then update the code to match.
 | ADR Index | `docs/adr/` | All architectural decision records |
 | Implementation Plan | `docs/implementation-plan.md` | Coding order and module scope (create when applicable) |
 | QA Plan | `docs/qa/qa-plan.md` | Test strategy and coverage map |
+| QA Audit Record | `docs/qa/QA.md` | Permanent record of QA audit findings and verification results |
 | Operations Runbook | `docs/runbooks/operations.md` | Setup, deployment, and troubleshooting |
 | API Reference | `docs/api-reference.md` | Endpoint documentation (create when applicable) |
 
