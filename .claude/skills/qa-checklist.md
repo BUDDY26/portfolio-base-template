@@ -104,7 +104,7 @@ Run the test command from CLAUDE.md Section 3 and capture coverage output. Repor
 | No dead code or commented-out blocks | |
 | Commit history is professional (descriptive messages, logical progression) | |
 | No secrets or credentials in any file | |
-| CLAUDE.md Sections 4–9 are filled in | |
+| CLAUDE.md Sections 4–9 and 12 are filled in | |
 
 ---
 

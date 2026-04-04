@@ -15,6 +15,7 @@ Read `CLAUDE.md` in full. Extract:
 - Permitted and forbidden actions (Section 3)
 - Active hooks (Section 9)
 - Known sharp edges (Section 7)
+- Agent operating constraints (Section 12)
 
 Confirm: "CLAUDE.md read. Rules loaded."
 

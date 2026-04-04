@@ -25,7 +25,7 @@ Run the QA checklist skill in full. Do not proceed if any of the following are o
 | `docs/architecture.md` reflects current implementation | |
 | `docs/runbooks/operations.md` setup steps are verified | |
 | At least one ADR documents a key design decision | |
-| `CLAUDE.md` Sections 1–9 are filled in (no placeholders) | |
+| `CLAUDE.md` Sections 1–9 and 12 are filled in (no placeholders) | |
 
 If any item fails, stop and fix it before continuing.
 

@@ -13,7 +13,7 @@ Every repository created from this template gets:
 |----------|----------------|
 | **Claude Code** | `CLAUDE.md` (9-section memory file), 6 skills, 6 hooks |
 | **CI/CD** | GitHub Actions pipeline (lint + test + security scan) |
-| **Documentation** | Architecture doc, ADR template, QA plan, operations runbook |
+| **Documentation** | Architecture doc, ADR template, operations runbook |
 | **Source structure** | `src/`, `tests/unit/`, `tests/integration/` (empty, ready to populate) |
 | **Automation** | `bootstrap.sh` (renames all placeholders), `validate-structure.sh` |
 
@@ -92,8 +92,6 @@ portfolio-base/
 │   ├── architecture.md               # System design template
 │   ├── adr/
 │   │   └── ADR-001-template.md       # Architecture Decision Record template
-│   ├── qa/
-│   │   └── qa-plan.md                # Test strategy template
 │   └── runbooks/
 │       └── operations.md             # Operational runbook template
 │
@@ -112,7 +110,6 @@ portfolio-base/
     │   ├── code-review.md            # Structured code review
     │   ├── refactor-playbook.md      # Safe refactoring workflow
     │   ├── documentation.md          # Docstrings + docs generation
-    │   ├── qa-checklist.md           # Quality + portfolio readiness audit
     │   └── release-procedure.md      # Pre-release checklist
     └── hooks/
         └── hooks.md                  # 6 automatic guardrails
@@ -136,7 +133,6 @@ Claude will scan the repository, build a system summary, and propose a prioritiz
 | `"Review this file"` | Run structured code review with severity ratings |
 | `"Refactor this"` | Safe, proposal-first refactoring |
 | `"Document this"` | Generate docstrings, README, architecture docs |
-| `"Run QA"` | Audit tests, docs, and portfolio readiness |
 | `"Prepare a release"` | Pre-release checklist and release report |
 
 ### Project Instructions (Paste into Claude Code)
@@ -145,8 +141,6 @@ Open **Claude Code → Project Settings → Custom Instructions** and paste:
 
 ```
 You are a software engineering assistant maintaining a professional portfolio.
-These repositories are reviewed by graduate admissions committees (UT Austin
-MSCS) and software engineering employers.
 
 MANDATORY RULES — apply every session:
 1. Always read CLAUDE.md before doing anything else.
@@ -198,4 +192,3 @@ After running `bootstrap.sh`, complete these in order:
 ---
 
 *Built as part of a professional software engineering portfolio system.*
-*Designed for UT Austin MSCS graduate admissions and employer review.*
