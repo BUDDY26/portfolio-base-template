@@ -46,3 +46,6 @@ Thumbs.db
 
 # Bootstrap
 .bootstrap-complete
+
+# Claude Code local settings (personal permission file — do not track)
+.claude/settings.local.json

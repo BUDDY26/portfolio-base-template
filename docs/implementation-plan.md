@@ -39,9 +39,9 @@
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | `{{TASK_1}}` | `{{OWNER}}` | `{{STATUS}}` |
-| 2 | `{{TASK_2}}` | `{{OWNER}}` | `{{STATUS}}` |
-| 3 | `{{TASK_3}}` | `{{OWNER}}` | `{{STATUS}}` |
+| 1 | `{{TASK_1}}` | `{{OWNER}}` | `{{TASK_STATUS}}` |
+| 2 | `{{TASK_2}}` | `{{OWNER}}` | `{{TASK_STATUS}}` |
+| 3 | `{{TASK_3}}` | `{{OWNER}}` | `{{TASK_STATUS}}` |
 
 ---
 

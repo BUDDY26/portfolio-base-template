@@ -198,10 +198,16 @@ Once approved: update the plan first, then update the code to match.
 
 ---
 
-## 9. Hooks Active
+## 9. Hooks (Behavioral Conventions)
 
-| Hook | Trigger | Action |
-|------|---------|--------|
+> These are **voluntary behavioral conventions**, not automatic or harness-enforced
+> controls. They take effect only because Claude reads `.claude/hooks/hooks.md` and
+> chooses to follow them. They are **not** executed by the harness unless separately
+> configured as real hooks in `.claude/settings.json`. See `.claude/hooks/hooks.md`
+> for the authoritative status.
+
+| Hook | Trigger | Convention |
+|------|---------|------------|
 | `post-edit-format` | After editing `.py` / `.ts` / `.js` files | Suggest running formatter |
 | `pre-delete-guard` | Before any file deletion | Halt and require explicit confirmation |
 | `test-on-core-change` | After editing files in `src/` | Remind to run test suite |

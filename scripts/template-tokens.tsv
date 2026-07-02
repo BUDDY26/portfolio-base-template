@@ -1,0 +1,67 @@
+# template-tokens.tsv — single source of truth for template placeholder tokens.
+# Consumed by scripts/bootstrap.sh and scripts/validate-structure.sh.
+# Format: TOKEN<TAB>CATEGORY<TAB>VALUE_KEY_OR_NOTE   (lines starting with # are ignored)
+#   identity  = filled once during bootstrap (VALUE_KEY = acquisition method)
+#   deferred  = filled when the associated work product is authored later
+#   meta      = literal instructional placeholder syntax; never replaced
+# identity acquisition methods (VALUE_KEY prefix):
+#   ASK_REQ:<prompt>          prompt user; must be non-empty
+#   ASK:<prompt>              prompt user; empty allowed
+#   ASK_DEFAULT_PROJECT:<p>   prompt user; default to PROJECT_NAME if empty
+#   AUTO:date                 today (YYYY-MM-DD)
+#   AUTO:status               Active Development
+#   SPECIAL:license           license selection + LICENSE file generation
+#   NOTE:<text>               fill with literal guidance text
+PROJECT_NAME	identity	ASK_REQ:Project name (e.g. my-api-service)
+PROJECT_DESCRIPTION	identity	ASK:One-sentence description
+GITHUB_USERNAME	identity	ASK:GitHub username
+REPO_NAME	identity	ASK_DEFAULT_PROJECT:Repo name
+LANGUAGE	identity	ASK:Primary language (e.g. Python 3.11)
+FRAMEWORK	identity	ASK:Framework (e.g. FastAPI, or None)
+TEST_FRAMEWORK	identity	ASK:Test framework (e.g. pytest)
+INSTALL_COMMAND	identity	ASK:Install command (e.g. pip install -r requirements.txt)
+RUN_COMMAND	identity	ASK:Run command (e.g. python src/main.py)
+TEST_COMMAND	identity	ASK:Test command (e.g. pytest tests/ -v)
+LINT_COMMAND	identity	ASK:Lint command (e.g. ruff check src/ then black src/)
+LICENSE	identity	SPECIAL:license
+STATUS	identity	AUTO:status
+LAST_UPDATED	identity	AUTO:date
+ARCHITECTURE_SUMMARY	identity	NOTE:- fill in: 3-5 sentence architecture description
+DEMONSTRATES	identity	NOTE:- fill in: what technical skills does this project show?
+PROJECT_OVERVIEW	identity	NOTE:- write 2-3 paragraph overview for this project
+REPO_TREE	identity	NOTE:- run: tree -L 3 --gitignore
+ENTRY_POINT_1	identity	NOTE:src/main.py - replace with actual entry point
+ENTRY_POINT_2	identity	NOTE:- replace with secondary entry point or remove
+CONFIG_FILE_2	identity	NOTE:- replace with config file or remove
+SHARP_EDGE_1	identity	NOTE:- fill in after running entry protocol
+SHARP_EDGE_2	identity	NOTE:- fill in after running entry protocol
+PREREQ_1	identity	NOTE:- list prerequisites here
+PREREQ_2	identity	NOTE:- list prerequisites here
+FEATURE_1	identity	NOTE:- describe a key feature
+FEATURE_2	identity	NOTE:- describe a key feature
+FEATURE_3	identity	NOTE:- describe a key feature
+AUTHOR	deferred	Filled when the implementation plan is authored
+PLAN_STATUS	deferred	Filled when the implementation plan is authored
+OBJECTIVE	deferred	Filled when the implementation plan is authored
+SCOPE_ITEM_1	deferred	Filled when the implementation plan is authored
+SCOPE_ITEM_2	deferred	Filled when the implementation plan is authored
+OUT_OF_SCOPE_1	deferred	Filled when the implementation plan is authored
+CONSTRAINT_1	deferred	Filled when the implementation plan is authored
+CONSTRAINT_1_DETAIL	deferred	Filled when the implementation plan is authored
+CONSTRAINT_2	deferred	Filled when the implementation plan is authored
+CONSTRAINT_2_DETAIL	deferred	Filled when the implementation plan is authored
+TASK_1	deferred	Filled when the implementation plan is authored
+TASK_2	deferred	Filled when the implementation plan is authored
+TASK_3	deferred	Filled when the implementation plan is authored
+TASK_STATUS	deferred	Per-task status; filled when the implementation plan is authored
+OWNER	deferred	Filled when the implementation plan is authored
+RISK_1	deferred	Filled when the implementation plan is authored
+RISK_2	deferred	Filled when the implementation plan is authored
+MITIGATION_1	deferred	Filled when the implementation plan is authored
+MITIGATION_2	deferred	Filled when the implementation plan is authored
+VALIDATION_CRITERION_1	deferred	Filled when the implementation plan is authored
+VALIDATION_CRITERION_2	deferred	Filled when the implementation plan is authored
+DATE	deferred	Filled when a QA audit record is written
+VERSION	deferred	Filled when a release is prepared
+RELEASE_NOTE	deferred	Filled when a release is prepared
+PLACEHOLDER	meta	Literal instructional placeholder syntax; never replaced
