@@ -1,6 +1,9 @@
-# QA Coverage Matrix
+# Web UI Coverage Matrix (Optional)
 
-> Use this matrix on every project audit. Check each category before marking QA complete.
+> **Optional checklist — applies only to projects with a web user interface.**
+> This is not part of the required template structure. Skip it for CLI tools,
+> libraries, backend services, or any project without a browser-facing UI.
+> When a project *does* have a web UI, use this matrix during QA audits.
 
 ---
 

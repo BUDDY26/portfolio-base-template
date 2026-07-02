@@ -1,193 +1,178 @@
-# portfolio-base
+# portfolio-base-template
 
-> A reusable GitHub template repository for professional software engineering projects.
-> 
+> A reusable GitHub **template repository** for professional software engineering
+> projects. New project repositories are created from this template, then
+> initialized with a bootstrap script and a set of Claude Code skills.
+
+> **Note:** This file documents how to *use the template*. After you run
+> `scripts/bootstrap.sh`, this file is preserved as `docs/TEMPLATE_USAGE.md`,
+> and the project-facing README (`TEMPLATE_README.md`) is promoted to `README.md`.
 
 ---
 
 ## What This Template Includes
 
-Every repository created from this template gets:
-
 | Category | What's Included |
 |----------|----------------|
-| **Claude Code** | `CLAUDE.md` (9-section memory file), 6 skills, 6 hooks |
-| **CI/CD** | GitHub Actions pipeline (lint + test + security scan) |
-| **Documentation** | Architecture doc, ADR template, operations runbook |
+| **Claude Code** | `CLAUDE.md` operating guide, 6 skills, 6 documented hook conventions |
+| **CI/CD** | GitHub Actions pipeline (lint + test + structure validation + security scan) |
+| **Documentation** | Architecture doc, ADR template, implementation-plan template, QA plan + audit record, operations runbook |
 | **Source structure** | `src/`, `tests/unit/`, `tests/integration/` (empty, ready to populate) |
-| **Automation** | `bootstrap.sh` (renames all placeholders), `validate-structure.sh` |
+| **Automation** | `bootstrap.sh` (fills identity tokens, promotes README, selects license), `validate-structure.sh` (state-aware validator), `template-tokens.tsv` (token source of truth) |
 
 ---
 
 ## Using This Template
 
-### Option A — GitHub UI (recommended)
+### 1. Create a repository from the template (GitHub)
 
-1. Click **Use this template** → **Create a new repository** at the top of this page
-2. Name your repository and choose visibility
-3. Clone your new repository locally
-4. Run the bootstrap script:
+1. Click **Use this template → Create a new repository** at the top of this page.
+2. Name the repository in kebab-case and choose visibility.
+3. Clone your new repository locally.
+
+### 2. Bootstrap it
 
 ```bash
 cd your-new-repo
 bash scripts/bootstrap.sh
 ```
 
-The script will prompt for your project name, language, commands, and automatically replace all `{{PLACEHOLDER}}` tokens throughout every file.
+> **Windows:** the `.sh` scripts require **Bash 4+** — Git Bash providing Bash 4+,
+> WSL providing Bash 4+, or another environment providing Bash 4+ (they use
+> associative arrays). They will not run in `cmd.exe` or PowerShell directly.
 
-### Option B — Manual Setup
+`bootstrap.sh` will:
 
-If you prefer to set up manually without the script:
+1. Prompt for project identity values (name, description, language, commands, …).
+2. Offer a **license** choice — **MIT**, **Apache-2.0**, or **None** (default: None).
+   For MIT/Apache-2.0 a complete `LICENSE` file is generated locally.
+3. Fill every **identity** placeholder token throughout the repository.
+   Deferred tokens (implementation plan, QA records, releases) are intentionally
+   left for later; meta tokens are never replaced.
+4. Preserve these template-usage instructions as `docs/TEMPLATE_USAGE.md`.
+5. Promote `TEMPLATE_README.md` to the root `README.md`, then remove the scaffold.
+6. Record the outcome in `.bootstrap-complete` and run the strict structure
+   validator as a final gate.
 
-1. Clone or download this template
-2. Find and replace all `{{PLACEHOLDER}}` tokens (see table below)
-3. Delete any language-specific files you don't need
-4. Run `bash scripts/validate-structure.sh` to confirm everything is in place
+### 3. Validate at any time
 
-#### All Placeholders
+```bash
+bash scripts/validate-structure.sh          # ordinary
+bash scripts/validate-structure.sh --strict # fail on warnings too
+```
 
-| Placeholder | Replace With | Example |
-|-------------|-------------|---------|
-| `{{PROJECT_NAME}}` | Your project name | `my-api-service` |
-| `{{PROJECT_DESCRIPTION}}` | One-sentence description | `A REST API for managing inventory` |
-| `{{GITHUB_USERNAME}}` | Your GitHub username | `jdoe` |
-| `{{REPO_NAME}}` | Repository name | `inventory-api` |
-| `{{LANGUAGE}}` | Primary language + version | `Python 3.11` |
-| `{{FRAMEWORK}}` | Framework (or `None`) | `FastAPI` |
-| `{{DATABASE}}` | Database (or `None`) | `PostgreSQL` |
-| `{{TEST_FRAMEWORK}}` | Test framework | `pytest` |
-| `{{INSTALL_COMMAND}}` | Dependency install command | `pip install -r requirements.txt` |
-| `{{RUN_COMMAND}}` | Application run command | `python src/main.py` |
-| `{{TEST_COMMAND}}` | Test run command | `pytest tests/ -v` |
-| `{{LINT_COMMAND}}` | Lint/format command | `ruff check src/ && black src/` |
-| `{{LICENSE}}` | License type | `MIT` |
-| `{{LAST_UPDATED}}` | Today's date | `2026-03-13` |
-| `{{STATUS}}` | Project status | `Active Development` |
-| `{{DEMONSTRATES}}` | Skills demonstrated | `REST API design, TDD, async processing` |
-| `{{ARCHITECTURE_SUMMARY}}` | 3–5 sentence architecture description | *(fill in after design)* |
-| `{{REPO_TREE}}` | Output of `tree -L 3 --gitignore` | *(fill in after populating src/)* |
+---
+
+## Placeholder Tokens
+
+The template uses double-brace placeholder tokens (bare names wrapped in double
+braces). **The single source of truth for token names and categories is
+[`scripts/template-tokens.tsv`](scripts/template-tokens.tsv)** — do not maintain a
+second list elsewhere. Every token is classified as:
+
+- **identity** — filled once during bootstrap (project name, language, commands, …).
+- **deferred** — filled later when the associated work product is authored
+  (implementation-plan tasks, QA audit dates, release versions).
+- **meta** — literal instructional syntax that is never replaced.
+
+Both `bootstrap.sh` and `validate-structure.sh` read this file. The strict
+validator fails on unresolved **identity** tokens but allows **deferred** and
+**meta** tokens to remain.
 
 ---
 
 ## Directory Structure
 
 ```
-portfolio-base/
-├── CLAUDE.md                         # Claude Code operating guide (9 sections)
-├── README.md                         # This file — template repository documentation
-├── TEMPLATE_README.md                # Project README scaffold (with {{PLACEHOLDER}} tokens)
-├── .env.example                      # Environment variable reference
-├── .gitignore                        # Python + Node + IDE + OS
+portfolio-base-template/
+├── CLAUDE.md                          # Claude Code operating guide
+├── README.md                          # This file (template usage) → docs/TEMPLATE_USAGE.md after bootstrap
+├── TEMPLATE_README.md                 # Project README scaffold → promoted to README.md by bootstrap
+├── .env.example                       # Environment variable reference (stack-neutral)
+├── .gitignore                         # Python + Node + IDE + OS (+ .claude/settings.local.json)
 │
-├── src/                              # Application source code (populate after bootstrap)
-│   └── .gitkeep
-│
-├── tests/
-│   ├── unit/
-│   │   └── .gitkeep
-│   └── integration/
-│       └── .gitkeep
+├── .claude/
+│   ├── skills/
+│   │   ├── entry-protocol.md          # Mandatory read-only startup scan
+│   │   ├── code-review.md             # Severity-labeled review
+│   │   ├── refactor-playbook.md       # Proposal-first refactoring
+│   │   ├── documentation.md           # Docstrings + docs generation
+│   │   ├── qa-checklist.md            # QA audit (QA agent ≠ coding agent)
+│   │   └── release-procedure.md       # Pre-release checklist
+│   └── hooks/
+│       └── hooks.md                   # 6 voluntary behavioral conventions (not harness-enforced)
 │
 ├── docs/
-│   ├── architecture.md               # System design template
+│   ├── architecture.md
+│   ├── implementation-plan.md
 │   ├── adr/
-│   │   └── ADR-001-template.md       # Architecture Decision Record template
+│   │   └── ADR-001-template.md
+│   ├── qa/
+│   │   ├── qa-plan.md
+│   │   ├── QA.md                      # Permanent QA audit record
+│   │   └── optional/
+│   │       └── web-ui-coverage-matrix.md   # Optional — web-UI projects only
 │   └── runbooks/
-│       └── operations.md             # Operational runbook template
+│       └── operations.md
 │
 ├── scripts/
-│   ├── bootstrap.sh                  # First-time setup + placeholder replacement
-│   └── validate-structure.sh         # Structure conformance checker
+│   ├── bootstrap.sh                   # First-time setup + identity fill + README promotion + license
+│   ├── validate-structure.sh          # State-aware structure + token validator
+│   └── template-tokens.tsv            # Token taxonomy (single source of truth)
 │
-├── .github/
-│   ├── workflows/
-│   │   └── ci.yml                    # Lint + test + security scan pipeline
-│   └── dependabot.yml
+├── src/                               # Application source (populate after bootstrap)
+├── tests/
+│   ├── unit/
+│   └── integration/
 │
-└── .claude/
-    ├── skills/
-    │   ├── entry-protocol.md         # Mandatory 9-phase repo scan
-    │   ├── code-review.md            # Structured code review
-    │   ├── refactor-playbook.md      # Safe refactoring workflow
-    │   ├── documentation.md          # Docstrings + docs generation
-    │   └── release-procedure.md      # Pre-release checklist
-    └── hooks/
-        └── hooks.md                  # 6 automatic guardrails
+└── .github/
+    ├── workflows/
+    │   └── ci.yml                     # Lint + test + validate-structure + security scan
+    ├── ISSUE_TEMPLATE/
+    │   ├── bug-report.md
+    │   └── feature-request.md
+    ├── pull_request_template.md
+    └── dependabot.yml
 ```
 
 ---
 
 ## Claude Code Workflow
 
-Once your repository is set up, open it in VS Code with Claude Code and say:
+Open the repository in Claude Code and say:
 
 > **"Run the entry protocol"**
 
-Claude will scan the repository, build a system summary, and propose a prioritized list of improvements — without touching any code until you approve.
+Claude scans the repository read-only, builds a summary, and proposes prioritized
+work — without touching code until you approve.
 
 ### Available Skills
 
-| Say this... | Claude will... |
-|-------------|---------------|
-| `"Run the entry protocol"` | Scan, summarize, and propose changes |
-| `"Review this file"` | Run structured code review with severity ratings |
-| `"Refactor this"` | Safe, proposal-first refactoring |
-| `"Document this"` | Generate docstrings, README, architecture docs |
-| `"Prepare a release"` | Pre-release checklist and release report |
+| Say this… | Skill | Claude will… |
+|-----------|-------|--------------|
+| `"Run the entry protocol"` | `entry-protocol.md` | Scan, summarize, and propose work |
+| `"Review this file"` | `code-review.md` | Structured review with severity ratings |
+| `"Refactor this"` | `refactor-playbook.md` | Safe, proposal-first refactoring |
+| `"Document this"` | `documentation.md` | Docstrings, README, architecture docs |
+| `"Run QA"` | `qa-checklist.md` | Test-coverage and portfolio-readiness audit |
+| `"Prepare a release"` | `release-procedure.md` | Pre-release checklist and report |
 
-### Project Instructions (Paste into Claude Code)
+### Hooks
 
-Open **Claude Code → Project Settings → Custom Instructions** and paste:
-
-```
-You are a software engineering assistant maintaining a professional portfolio.
-
-MANDATORY RULES — apply every session:
-1. Always read CLAUDE.md before doing anything else.
-2. Run the entry protocol (.claude/skills/entry-protocol.md) before modifying code.
-3. Respect the three-tier permission model in CLAUDE.md Section 3.
-4. Use skills for repeated workflows — read the relevant .claude/skills/*.md first.
-5. Respect all hooks in .claude/hooks/hooks.md.
-6. Write documentation for a technical reader who has never seen this project.
-7. Update CLAUDE.md at the end of every session with new findings.
-```
-
----
-
-## Applying to Existing Repositories
-
-To bring an existing repo up to this standard:
-
-1. Copy `.claude/` into the repo root
-2. Copy `docs/` templates (don't overwrite existing docs)
-3. Copy `scripts/bootstrap.sh` and `scripts/validate-structure.sh`
-4. Create `CLAUDE.md` from the template and fill in sections 1–3
-5. Run `bash scripts/validate-structure.sh` to see what's missing
-6. In Claude Code: `"Run the entry protocol"` — it will handle the rest
-
----
-
-## After Bootstrap: What To Do First
-
-After running `bootstrap.sh`, complete these in order:
-
-- [ ] Fill in `CLAUDE.md` sections 4–9 (architecture, sharp edges, portfolio context)
-- [ ] Add your source files to `src/`
-- [ ] Write real tests in `tests/unit/` and `tests/integration/`
-- [ ] Fill in `docs/architecture.md` with your system design
-- [ ] Create your first real ADR in `docs/adr/` (copy `ADR-001-template.md`)
-- [ ] Add all required environment variables to `.env.example`
-- [ ] Enable GitHub Actions in your repository settings
-- [ ] Run `bash scripts/validate-structure.sh --strict` — it should pass clean
+`.claude/hooks/hooks.md` documents six guardrails (format reminder, delete guard,
+test reminder, sensitive-directory guard, no-secrets, proposal-before-refactor).
+These are **voluntary behavioral conventions**, not automatic or harness-enforced
+controls — Claude follows them because it reads the file. To enforce any of them
+at the harness level, configure real hooks in `.claude/settings.json`.
 
 ---
 
 ## How to Enable This as a GitHub Template
 
-1. Push this repository to GitHub
-2. Go to **Settings → General**
-3. Check **Template repository**
-4. Now the **"Use this template"** button appears on the repository page
+1. Push this repository to GitHub.
+2. Go to **Settings → General**.
+3. Check **Template repository**.
+4. The **"Use this template"** button now appears on the repository page.
 
 ---
 
