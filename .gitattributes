@@ -1,0 +1,5 @@
+# Normalize text files automatically.
+* text=auto
+
+# Shell scripts must use LF for cross-platform Bash compatibility.
+*.sh text eol=lf
