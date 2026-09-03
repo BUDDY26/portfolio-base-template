@@ -76,3 +76,7 @@ Key technical decisions are in [`docs/adr/`](docs/adr/).
 
 *Maintained by [@{{GITHUB_USERNAME}}](https://github.com/{{GITHUB_USERNAME}})*
 *Last updated: {{LAST_UPDATED}}*
+
+---
+
+TEMPLATE VERSION: 2026-08-02 (A1-1 propagation-manifest baseline; Ruben-authorized)

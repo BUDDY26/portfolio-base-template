@@ -1,6 +1,6 @@
 # Hooks
 
-These are behavioral guidelines Claude follows when this file is loaded into context. They are **not** enforced automatically by the harness — they rely on Claude reading this file and applying the rules voluntarily. To enforce hooks at the harness level, configure them in `.claude/settings.json`.
+These are behavioral guidelines Claude follows when this file is loaded into context. They are **not** enforced automatically by the harness — they rely on Claude reading this file and applying the rules voluntarily. No `.claude/settings.json` exists in this template; the only settings file present is `.claude/settings.local.json` (permissions only). To enforce hooks at the harness level, add a `hooks` block to a settings file.
 
 ---
 

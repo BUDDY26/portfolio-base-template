@@ -162,8 +162,10 @@ work — without touching code until you approve.
 `.claude/hooks/hooks.md` documents six guardrails (format reminder, delete guard,
 test reminder, sensitive-directory guard, no-secrets, proposal-before-refactor).
 These are **voluntary behavioral conventions**, not automatic or harness-enforced
-controls — Claude follows them because it reads the file. To enforce any of them
-at the harness level, configure real hooks in `.claude/settings.json`.
+controls — Claude follows them because it reads the file. No `.claude/settings.json`
+exists in this template; the only settings file present is `.claude/settings.local.json`
+(permissions only). To enforce any of them at the harness level, add a `hooks` block
+to a settings file.
 
 ---
 

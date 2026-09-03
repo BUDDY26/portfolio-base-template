@@ -1,0 +1,71 @@
+# propagation-manifest.tsv
+# Mirror-governed file list with pinned SHA-256 hashes for portfolio-base-template.
+# Authored 2026-08-02 per Ruben's A1-1 ruling; hashes recomputed at authoring time
+# directly from the live repo and cross-checked against the Baseline Pin Table
+# (6_control/repo-audit-5-portfolio-base-template-2026-07-12.md, 2026-07-12).
+#
+# Columns:
+#   path              - repo-relative path of the mirror-governed file
+#   role              - MIRROR (propagate verbatim to targets) or ADAPT (targets
+#                       customize this file per-target; only the template's own
+#                       baseline pin is tracked here)
+#   sha256_live       - SHA-256 recomputed from the live file at authoring time
+#   sha256_pin_table  - SHA-256 recorded in the Baseline Pin Table (2026-07-12)
+#   status            - PINNED (live matches pin table) or DRIFT (live differs;
+#                       both hashes listed, neither silently adopted)
+#
+# Any file changed in the template MUST have its sha256_live (and status, if it
+# changes) bumped in this manifest in the SAME change that alters the file.
+# See docs/propagation.md for the full procedure.
+#
+# NOTE (pin-table hash truncation): the Baseline Pin Table records only the
+# first 16 hex characters of each SHA-256 (its "..." suffix below reflects
+# that — the table itself never carried a full 64-char value). All 19
+# recomputed live hashes matched the pin table's recorded 16-char prefix
+# exactly at authoring time (18 of 19 rows: status PINNED, zero DRIFT). The
+# CLAUDE.md row is UPDATED-THIS-PASS: this same A1-1 authoring pass added one
+# §10 Documentation Index line (web-ui-coverage-matrix.md, A2-3 micro-fix) to
+# CLAUDE.md itself, so its live hash now reflects that edit rather than the
+# 2026-07-12 pin-table baseline. New live hash recomputed post-edit and
+# recorded below; this is an intentional, in-pass bump per docs/propagation.md
+# step 1 (file change and manifest pin bump in the same change), not drift.
+#
+# NOTE (role assignment — authoring inference, labeled as such): neither the
+# plan nor the pin table assigns MIRROR/ADAPT per file. Roles below follow
+# the plan's stated semantics (MIRROR = propagate verbatim; ADAPT = target
+# customizes): governance/tooling files common across all targets (CLAUDE.md,
+# validate-structure.sh, bootstrap.sh, template-tokens.tsv, the six skills,
+# qa-plan.md, web-ui-coverage-matrix.md, ci.yml) are marked MIRROR; narrative
+# per-project documents that are expected to diverge per target (hooks.md,
+# architecture.md, implementation-plan.md, ADR-001-template.md, QA.md,
+# operations.md) are marked ADAPT. Ruben should confirm/correct this
+# classification before any target sync dispatches against it.
+#
+# MIRROR/ADAPT roles CONFIRMED as written (Ruben, 2026-08-02; reviewed manifest clean).
+#
+# NOTE (2026-08-02, ruling 7 — root-fix pass): CLAUDE.md and .claude/hooks/hooks.md
+# were edited to reword their settings.json references (no .claude/settings.json
+# exists in this template; only .claude/settings.local.json is present). Both rows'
+# sha256_live recomputed post-edit and marked UPDATED-THIS-PASS per docs/propagation.md
+# step 1. README.md was also edited in the same pass but carries no manifest row (not
+# a mirror-governed file) so no row update applies to it.
+path	role	sha256_live	sha256_pin_table	status
+CLAUDE.md	MIRROR	ce910ad08e4bbec706509df7d5fcbd86cd507802c4e4d1a9ac99d416bc20c2e1	153e688753423f3e...	UPDATED-THIS-PASS
+scripts/validate-structure.sh	MIRROR	c79288967c3d6afa1f59486eb3eef3bd3606d53515b0d061bc035fdfc88454e4	c79288967c3d6afa...	PINNED
+scripts/bootstrap.sh	MIRROR	8b0449e47e425e01d64f1b2dec3c69ad22523cfffd13db650a3ac317169df053	8b0449e47e425e01...	PINNED
+scripts/template-tokens.tsv	MIRROR	25ea0b5784dd68bc8931d44a465cec8a44eb2eccfa52bc69caab480f408efaa6	25ea0b5784dd68bc...	PINNED
+.claude/skills/code-review.md	MIRROR	7ba7993319d0531afb323bc3008da86a128e02d28d057252fa7cb9e02c194fcb	7ba7993319d0531a...	PINNED
+.claude/skills/documentation.md	MIRROR	7c8f7ad2035881b502173ecb5fd8f1ef73a9513d6050314503539ebeb6627abe	7c8f7ad2035881b5...	PINNED
+.claude/skills/entry-protocol.md	MIRROR	e452c42a9be442ea5b7c571cdd8d003b88f473f71d35806b126cf91cad205e02	e452c42a9be442ea...	PINNED
+.claude/skills/qa-checklist.md	MIRROR	10a96e42662482a73aaf9216eeda5be1478784de87f22d1cbd99347e2231c673	10a96e42662482a7...	PINNED
+.claude/skills/refactor-playbook.md	MIRROR	ca57ae43d3901801d1e433f958044282fe531acb011e61dc594f1afdd3408c38	ca57ae43d3901801...	PINNED
+.claude/skills/release-procedure.md	MIRROR	e36a9de3b205e7f91fc07d91e4e71814cb04037e1a9d1c50a0268f6117c145a7	e36a9de3b205e7f9...	PINNED
+.claude/hooks/hooks.md	ADAPT	ee593208174a56d8e7ffe45024ae0d3785507c3a1490bcc30cba725a7bf3e673	57a3f970148eb3c4...	UPDATED-THIS-PASS
+docs/architecture.md	ADAPT	a61c362a364643dbc096a5d892f2d4c9a170ea4def51473d6d887c823c10fc09	a61c362a364643db...	PINNED
+docs/implementation-plan.md	ADAPT	bdd1cb6f7334454e82d26d784a46f02e43314958bd2b28770f6c5b5db8505c53	bdd1cb6f7334454e...	PINNED
+docs/adr/ADR-001-template.md	ADAPT	72afadddf868c2fd808428a6f34078187bf6f2766880210cde310f3a4ce25d9a	72afadddf868c2fd...	PINNED
+docs/qa/qa-plan.md	MIRROR	9bf13b37b51c77e770e9c1943bd4cda40d81e683dac9602ff2e59c3f845d9739	9bf13b37b51c77e7...	PINNED
+docs/qa/QA.md	ADAPT	15f163e6bc020075b0ee28575300ce3c81427e427fb8e4c6a7a36ada9588dddc	15f163e6bc020075...	PINNED
+docs/qa/optional/web-ui-coverage-matrix.md	MIRROR	d30c9ee1675f025a8beede10726495697c3bfe0ff1f92c00fd69f0278f2c910b	d30c9ee1675f025a...	PINNED
+docs/runbooks/operations.md	ADAPT	da81252325bd39823f5473db10078f53811dd376a52b7da45e96c4da56d5324a	da81252325bd3982...	PINNED
+.github/workflows/ci.yml	MIRROR	319b5449a483475af04e1bbb69aa864080a988c2e2244c23d9477559e39a3b85	319b5449a483475a...	PINNED

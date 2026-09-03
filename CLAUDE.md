@@ -202,9 +202,10 @@ Once approved: update the plan first, then update the code to match.
 
 > These are **voluntary behavioral conventions**, not automatic or harness-enforced
 > controls. They take effect only because Claude reads `.claude/hooks/hooks.md` and
-> chooses to follow them. They are **not** executed by the harness unless separately
-> configured as real hooks in `.claude/settings.json`. See `.claude/hooks/hooks.md`
-> for the authoritative status.
+> chooses to follow them. No `.claude/settings.json` exists in this template — the
+> only settings file present is `.claude/settings.local.json` (permissions only, no
+> hooks configured). To harness-enforce these hooks, add a `hooks` block to a
+> settings file. See `.claude/hooks/hooks.md` for the authoritative status.
 
 | Hook | Trigger | Convention |
 |------|---------|------------|
@@ -228,6 +229,7 @@ Once approved: update the plan first, then update the code to match.
 | QA Audit Record | `docs/qa/QA.md` | Permanent record of QA audit findings and verification results |
 | Operations Runbook | `docs/runbooks/operations.md` | Setup, deployment, and troubleshooting |
 | API Reference | `docs/api-reference.md` | Endpoint documentation (create when applicable) |
+| Web UI Coverage Matrix | `docs/qa/optional/web-ui-coverage-matrix.md` | Optional — web-UI projects only |
 
 ---
 
